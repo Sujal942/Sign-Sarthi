@@ -14,6 +14,8 @@ import speech_recognition as sr
 import atexit
 import os
 
+app = Flask(__name__)  # Single Flask instance
+
 # Ensure the video capture is released and windows are destroyed on exit
 def cleanup():
     cap.release()
@@ -66,7 +68,6 @@ def pre_process_landmark(landmark_list):
 
     return temp_landmark_list
 
-app = Flask(__name__)
 cap = cv2.VideoCapture(0)
 
 def generate_frames():
@@ -218,4 +219,5 @@ def add_space():
     return jsonify(predicted_text=predicted_text)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port, debug=True)
