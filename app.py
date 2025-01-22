@@ -1,4 +1,5 @@
 from flask import Flask, render_template, Response, jsonify, request
+import streamlit as st
 import cv2
 import mediapipe as mp
 import itertools
@@ -13,6 +14,11 @@ import pyttsx3
 import speech_recognition as sr
 import atexit
 import os
+from PIL import Image 
+import matplotlib.pyplot as plt
+
+
+st.set_page_config(layout="wide")
 
 app = Flask(__name__)  # Single Flask instance
 
